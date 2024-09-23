@@ -1,0 +1,58 @@
+%matplotlib inline
+import numpy as np 
+import matplotlib.pyplot as plt
+from scipy.signal import butter ,filtfilt
+
+np.random.seed(0)
+
+pollution_data= np.array([60,70,80,90,100,110,120,130,140,150])
+pollution_data1= np.array([80,50,20,10,105,115,125,135,145,150])
+
+hr_data = np.random.randint(60, 130, size=1440)
+
+def lowpass_filter(hr_data, cutoff, rate):
+    nyquist = 0.5 * rate
+    normal_cutoff = cutoff / nyquist
+    b, a = butter(4, normal_cutoff, btype='low')
+    smooth_data = filtfilt(b, a, hr_data)
+    return smooth_data
+
+cutoff_freq = 0.1  
+sample_rate = 1  
+smooth_hr = lowpass_filter(hr_data, cutoff_freq, sample_rate)
+
+
+average_data = np.mean(pollution_data)
+
+
+   
+
+average_data1 = np.mean(pollution_data1)
+
+
+
+
+
+
+# matplotlib
+
+plt.plot(smooth_hr,hr_data,color='r')
+plt.plot(smooth_hr,hr_data,color='b')
+
+
+
+
+
+        
+        
+        
+    
+    
+    
+
+
+
+
+
+
+
